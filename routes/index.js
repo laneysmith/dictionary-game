@@ -7,4 +7,13 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.post('/', function(req, res, next) {
+  knex('player').insert(req.body).then(function(){
+    res.redirect('/game');
+  }).catch(function(error) {
+    console.log(error);
+    next(error);
+  });
+});
+
 module.exports = router;
